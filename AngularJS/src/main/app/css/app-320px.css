@@ -1,0 +1,30 @@
+@CHARSET "UTF-8";
+
+
+
+@media (max-width: 320px) {
+	
+	/*------------- login dialog -------------*/
+	
+	.login-dialog {
+		width: auto;
+	    margin-top: 10px;
+	}
+	
+	.login-dialog input[type="button"] {
+	    width: 100%;
+	}
+	
+
+	/*------------- message dialog -------------*/
+		
+	.message-dialog .message-filter input {
+		width: 100%;
+	}
+	
+	.message-dialog .message-filter a {
+	    display: block;
+	    margin-bottom: 15px;
+	    margin-right: 0;
+	}		
+}

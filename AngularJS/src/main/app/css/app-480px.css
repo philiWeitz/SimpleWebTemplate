@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+
+
+@media (max-width: 480px) {
+	
+	/*------------- message dialog -------------*/
+
+	.message-dialog {
+	    width: auto;
+	    margin-top: 0px;
+	}
+	
+	.message-dialog .message-filter {
+		width: 100%;
+	}
+
+	.message-dialog .col-1 {
+	    width: 100%;
+	}
+	
+	.message-dialog .col-2 {
+	    display: none;
+	}
+}

@@ -1,0 +1,74 @@
+@CHARSET "UTF-8";
+
+
+/*------------- login dialog -------------*/
+	
+.login-dialog {
+    background-color: #f7f7f7;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 30px;
+    
+    box-shadow: 4px 4px 10px #cfcfcf;
+	margin-top: 100px;
+	width: 250px;
+}
+	
+.login-dialog input[type="text"], .login-dialog input[type="password"] {
+	width: 100%;
+	margin-bottom: 10px;
+}
+
+.login-dialog input[type="button"] {
+    display: block;
+    margin-top: 20px;
+    margin-left: auto;
+}
+
+
+/*------------- message dialog -------------*/
+
+.message-dialog {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    padding: 10px;
+    width: 700px;
+}
+
+.message-dialog .message-filter {
+	width: 60%;
+	margin-bottom: 20px;
+    text-align: right;
+}
+
+.message-dialog .message-filter a {
+	margin-right: 5px;
+}
+
+.message-dialog .col-1 {
+	background-color: #f7f7f7;
+	box-shadow: 4px 4px 10px #cfcfcf;
+	
+    display: inline-block;
+    width: 60%;
+}
+
+.message-dialog .col-2 {
+    background-color: #f7f7f7;
+    box-shadow: 4px 4px 10px #cfcfcf;
+    
+	float: right;
+    width: 30%;
+}
+
+.message-dialog .col-1 .div-message {
+    box-shadow: 4px 4px 10px #cfcfcf;
+    margin: 15px;
+    padding: 10px;
+}
+
+.message-dialog .col-2 .div-message {
+	font-weight: bold;
+    margin: 10px;
+}

@@ -1,0 +1,41 @@
+<html ng-app="MessageApp">
+
+	<head>
+	  	<script src="../js/bower_components/angular/angular.js"></script>
+	  	<script src="../js/controller/messageAppCtrl.js"></script>
+	  	
+		<link rel="stylesheet" type="text/css" href="../css/main.css">
+	</head>
+	
+	<body ng-controller="MessageCtrl">
+	
+		<div class="message-dialog">
+			
+			<div class="message-filter">
+				<a href="loginView.html">Login</a>
+				<input  type="text" placeholder="Filter Messages" ng-model="query">
+			</div>
+			
+			<div>
+				<div class="col-1">
+					<div class="div-message" hidden="true">
+						<label class="header2">{{errorMsg}}</label>
+						<label name="status">{{errorStatus}}"</label>
+					</div>
+				
+					<div class="div-message" ng-repeat="mess in messages | filter:query">
+						<label class="header2">{{mess.caption}}</label> <br/>
+						<label class="message-body">{{mess.text}}</label>
+					</div>
+				</div>
+				
+				<div class="col-2">
+					<div class="div-message" ng-repeat="mess in messages">
+						<label>{{mess.caption}}</label> <br/>
+					</div>
+				</div>
+			</div>
+		</div>
+	
+	</body>
+</html>

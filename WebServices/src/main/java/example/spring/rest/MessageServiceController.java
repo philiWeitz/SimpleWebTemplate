@@ -26,7 +26,7 @@ public class MessageServiceController {
 
 	/*
 	 * example call: -
-	 * http://localhost:8080/SimpleWebTemplateWebServices/service/message/1
+	 * http://localhost:8080/SimpleWebTemplateWebServices/service/message/getAll
 	 * /myStrParameter
 	 */
 
@@ -34,6 +34,7 @@ public class MessageServiceController {
 	private MessageDAOService messageService;
 
 	private ObjectMapper mapper = new ObjectMapper();
+
 
 	@RequestMapping(value = "/get/{id}", method = RequestMethod.GET)
 	public String getMessageById(@PathVariable Long id) {
@@ -61,7 +62,7 @@ public class MessageServiceController {
 	}
 
 	@RequestMapping(value = "/add/{messageJson}", method = RequestMethod.GET)
-	public void getGreeting(@PathVariable String messageJson) {
+	public void addMessage(@PathVariable String messageJson) {
 
 		try {
 			Message message = mapper.readValue(messageJson, Message.class);

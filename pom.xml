@@ -28,6 +28,7 @@
 	<modules>
 		<module>Datamodel</module>
 		<module>WebServices</module>
+		<module>AngularJS</module>		
   	</modules>
 
 	<build>

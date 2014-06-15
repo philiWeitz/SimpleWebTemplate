@@ -12,6 +12,7 @@
 
 	<artifactId>SimpleWebTemplateWebServices</artifactId>
 	<packaging>war</packaging>
+	
 
 	<dependencies>
 		<dependency>
@@ -23,12 +24,12 @@
 			<groupId>org.codehaus.jackson</groupId>
 			<artifactId>jackson-mapper-asl</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>web.de.simpleWebTemplate</groupId>
 			<artifactId>SimpleWebTemplateDatamodel</artifactId>
