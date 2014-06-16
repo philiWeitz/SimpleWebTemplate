@@ -32,7 +32,7 @@ public class LoginServiceController {
 
 	
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<HttpStatus> createUser(@RequestBody String userString, UriComponentsBuilder builder) {
+    public ResponseEntity<HttpStatus> login(@RequestBody String userString, UriComponentsBuilder builder) {
 
 		try {
 			JsonNode rootNode = mapper.readTree(userString);
@@ -54,4 +54,14 @@ public class LoginServiceController {
     	
         return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
     }
+    
+    @RequestMapping(value = "/logout", method = RequestMethod.POST)
+    public void logout(@RequestBody String userString, UriComponentsBuilder builder) {
+    	authManager.removeAuthentification(); 	
+    }    
+    
+	@RequestMapping(value = "/isLoggedIn", method = RequestMethod.GET)
+	public String isUserLoggedIn() {
+		return authManager.isLoggedIn().toString();
+	}
 }

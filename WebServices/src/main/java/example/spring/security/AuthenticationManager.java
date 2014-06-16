@@ -43,7 +43,14 @@ public class AuthenticationManager {
 	    // Create a new session and add the security context.
 	    session().setAttribute(SECURITY_ATTRIBUTE, securityContext);
     }
-
+	
+	public void removeAuthentification() {
+		session().setAttribute(SECURITY_ATTRIBUTE, null);
+	}
+	
+	public Boolean isLoggedIn() {
+		return (null != session().getAttribute(SECURITY_ATTRIBUTE));
+	}
 	
 	private static HttpSession session() {
 	    ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();

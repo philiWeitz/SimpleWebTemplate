@@ -1,31 +1,36 @@
 <html ng-app="MessageApp">
 	<head>
 		<script src="../js/bower_components/angular/angular.js"></script>
-	  	<script src="../js/controller/messageAppCtrl.js"></script>
+	  	<script src="../js/controller/loginCtrl.js"></script>
 	  	
 		<link rel="stylesheet" type="text/css" href="../css/main.css">
 	</head>
 	
-	<body ng-controller="LoginController">
-	
-		<form ng-submit="login()">
+	<body ng-controller="LoginCtrl">
 			<div class="login-dialog">
 				
 				<label class="header1">Sign in to Simple Web Template</label> <br/>
 				<div class="horizontal-line"></div>
 
-				<div class="error-dialog" style="display: {{errorDialogVisible}};">
-					<label>User name or password is incorrect.</label>
-				</div>
-								
-				<input type="text" name="name" placeholder="Name" ng-model="name" required/> <br/>
-				<input type="password" name="password" placeholder="Password" ng-model="password" required/> <br/>
+				<form id="#loginForm" ng-submit="login()">
+					<div class="error-dialog" style="display: {{errorDialogVisible}};">
+						<label>User name or password is incorrect.</label>
+					</div>
+							
+					<input type="text" name="name" placeholder="Name" ng-model="name" required/> <br/>
+					<input type="password" name="password" placeholder="Password" ng-model="password" required/> <br/>
+					
+					<input type="checkbox" value="remember">
+					<label>Remember me</label> <br/>
+					
+					<input type="submit" value="Sign in"/>
+				</form>
 				
-				<input type="checkbox" value="remember">
-				<label>Remember me</label> <br/>
-				
-				<input type="submit" value="Sign in"/>
+				<form id="#logoutForm" ng-submit="logout()">
+					<label>You are already logged in.</label> <br/>
+					
+					<input type="submit" value="Sign out"/>
+				</form>
 			</div>
-		</form>
 	</body>
 </html>
