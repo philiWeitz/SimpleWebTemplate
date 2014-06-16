@@ -3,17 +3,23 @@ package example.jpa.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import example.jpa.model.Message;
+import example.jpa.model.User;
 import example.jpa.service.MessageDAOService;
+import example.jpa.service.UserDAOService;
 
 
 public class TestDataServiceImpl {
 
 	@Autowired
 	private MessageDAOService messageService;
+	
+	@Autowired
+	private UserDAOService userService;
 
 	
 	public void createTestData() {
 		createMessageTestData();
+		createUserTestData();
 	}
 	
 	private void createMessageTestData() {
@@ -28,6 +34,15 @@ public class TestDataServiceImpl {
 			
 			messageService.saveOrUpdate(m1);
 			messageService.saveOrUpdate(m2);
+		}
+	}
+	
+	private void createUserTestData() {
+		if(userService.getAll().isEmpty()) {
+			User u1 = new User();
+			u1.setName("test");
+			u1.setPassword("test");
+			userService.saveOrUpdate(u1);
 		}
 	}
 }

@@ -17,7 +17,7 @@ public abstract class AbstractDAOServiceImpl<T extends AbstractEntity> {
 	private static Logger LOG = LogManager
 			.getLogger(AbstractDAOServiceImpl.class);
 	
-	private EntityManager em;
+	protected EntityManager em;
 
 	
 	public AbstractDAOServiceImpl() {

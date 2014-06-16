@@ -8,7 +8,8 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 	
 		<class>example.jpa.model.Message</class>
-
+		<class>example.jpa.model.User</class>
+		
 		<properties>
 			<!-- Database connection -->
 			<property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:hello-world" />

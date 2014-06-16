@@ -11,7 +11,7 @@
 	    margin-top: 10px;
 	}
 	
-	.login-dialog input[type="button"] {
+	.login-dialog input[type="submit"] {
 	    width: 100%;
 	}
 	

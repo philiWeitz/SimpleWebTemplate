@@ -19,10 +19,14 @@
 	margin-bottom: 10px;
 }
 
-.login-dialog input[type="button"] {
+.login-dialog input[type="submit"] {
     display: block;
     margin-top: 20px;
     margin-left: auto;
+}
+
+.login-dialog .error-dialog {
+	margin-bottom: 15px;
 }
 
 
