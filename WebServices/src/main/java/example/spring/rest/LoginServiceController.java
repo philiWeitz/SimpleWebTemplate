@@ -13,8 +13,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import example.bl.security.service.GuestService;
 import example.jpa.model.User;
-import example.jpa.service.UserDAOService;
+import example.spring.security.AuthenticationManager;
 
 @RestController
 @RequestMapping("/service/login")
@@ -24,9 +25,10 @@ public class LoginServiceController {
 			.getLogger(LoginServiceController.class);
 
 	private ObjectMapper mapper = new ObjectMapper();
-
+	private AuthenticationManager authManager = new AuthenticationManager();
+	 
 	@Autowired
-	private UserDAOService userService;
+	private GuestService guestService;
 
 	
     @RequestMapping(method = RequestMethod.POST)
@@ -37,11 +39,12 @@ public class LoginServiceController {
 			String name = rootNode.get("name").getTextValue();
 			String password = rootNode.get("password").getTextValue();			
 			
-			User user = userService.getUser(name, password);
+			User user = guestService.getUser(name, password);
 			
 			if(null == user) {
 				return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
 			} else {
+				authManager.authenticate(user);
 				return new ResponseEntity<HttpStatus>(HttpStatus.OK);
 			}
 			

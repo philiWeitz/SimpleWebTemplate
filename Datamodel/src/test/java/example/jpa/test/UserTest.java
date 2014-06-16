@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import example.jpa.model.User;
+import example.jpa.model.UserRole;
 import example.jpa.service.UserDAOService;
 
 
@@ -24,12 +25,11 @@ public class UserTest {
 		
 		User user = new User();
 		user.setName("test");
-		user.setPassword("test");	
+		user.setPassword("test");
+		user.getRoles().add(UserRole.ROLE_ADMIN);
+		user.getRoles().add(UserRole.ROLE_USER);
 		user = userService.saveOrUpdate(user);	
-		
-		User u = userService.getById(user.getId());
-		assertNotNull(u);
-		
+
 		User result = userService.getUser(user.getName(), user.getPassword());
 		assertNotNull(result);
 	}

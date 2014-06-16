@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import example.jpa.service.MessageDAOService;
+import example.bl.security.service.AdminService;
+import example.bl.security.service.GuestService;
 
 @RestController
 @RequestMapping("/service/message")
@@ -23,7 +24,9 @@ public class MessageServiceController {
 	 */
 
 	@Autowired
-	private MessageDAOService messageService;
+	private GuestService guestService;
+	@Autowired
+	private AdminService adminService;
 
 	private ObjectMapper mapper = new ObjectMapper();
 
@@ -32,6 +35,6 @@ public class MessageServiceController {
 	public String getAllMessages() throws JsonGenerationException,
 			JsonMappingException, IOException {
 
-		return mapper.writeValueAsString(messageService.getAll());
+		return mapper.writeValueAsString(guestService.getAllMessages());
 	}
 }

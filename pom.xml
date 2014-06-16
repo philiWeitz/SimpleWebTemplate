@@ -13,6 +13,8 @@
 	
 		<junit.version>4.8.1</junit.version>
 		<spring.version>4.0.5.RELEASE</spring.version>
+		<spring.security.version>3.2.4.RELEASE</spring.security.version>
+		<servlet.api.version>2.5</servlet.api.version>
 		<javax.annotation.version>1.2</javax.annotation.version>
 
 		<jpa.api.version>1.0.0.Final</jpa.api.version>
@@ -27,9 +29,10 @@
 
 	<modules>
 		<module>Datamodel</module>
+		<module>BusinessLogic</module>
 		<module>WebServices</module>
-		<module>AngularJS</module>		
-  	</modules>
+		<module>AngularJS</module>
+	</modules>
 
 	<build>
 		<pluginManagement>
@@ -112,12 +115,30 @@
 	            <version>${spring.version}</version>
 	            <scope>test</scope>
 	        </dependency>
+
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency> 
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
         	
         	<dependency>
 				<groupId>javax.annotation</groupId>
 				<artifactId>javax.annotation-api</artifactId>
 				<version>${javax.annotation.version}</version>
 			</dependency>
+			
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>${servlet.api.version}</version>
+				<scope>provided</scope>
+		  	</dependency>
 			
 			<!-- Hibernate dependencies -->
 			<dependency>

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import example.jpa.model.Message;
 import example.jpa.model.User;
+import example.jpa.model.UserRole;
 import example.jpa.service.MessageDAOService;
 import example.jpa.service.UserDAOService;
 
@@ -40,9 +41,18 @@ public class TestDataServiceImpl {
 	private void createUserTestData() {
 		if(userService.getAll().isEmpty()) {
 			User u1 = new User();
-			u1.setName("test");
-			u1.setPassword("test");
+			u1.setName("admin");
+			u1.setPassword("admin");
+			u1.getRoles().add(UserRole.ROLE_ADMIN);
+			u1.getRoles().add(UserRole.ROLE_USER);
+			
+			User u2 = new User();
+			u2.setName("user");
+			u2.setPassword("user");
+			u2.getRoles().add(UserRole.ROLE_USER);
+			
 			userService.saveOrUpdate(u1);
+			userService.saveOrUpdate(u2);
 		}
 	}
 }
