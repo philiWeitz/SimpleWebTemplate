@@ -14,6 +14,20 @@
 	</context:component-scan>
 
 
+    <!-- email trigger definition -->
+	<bean id="EmailScheduler" class="example.scheduler.EmailChronTrigger"/>
+
+	<bean id="StartupEmailScheduler" class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+	  	<property name="targetObject"><ref local="EmailScheduler" /></property>
+	    <property name="targetMethod"><value>init</value></property>
+	    <property name="arguments">
+			<list>
+		    	<value>0/20 * * * * ?</value>
+		    </list>
+		</property>
+	</bean>
+
+
 	<!-- Remove this for production -->
 	<bean id="TestDataService" class="example.jpa.service.impl.TestDataServiceImpl"/>
 
