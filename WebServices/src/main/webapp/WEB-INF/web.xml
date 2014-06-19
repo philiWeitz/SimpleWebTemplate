@@ -15,7 +15,7 @@
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
-	
+
 	<servlet>
 		<servlet-name>rest</servlet-name>
 		<servlet-class>

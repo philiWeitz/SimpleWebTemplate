@@ -67,6 +67,8 @@ public class LoginServiceController {
 	@RequestMapping(value = "/isLoggedIn", method = RequestMethod.GET)
 	public ResponseEntity<String> isUserLoggedIn() {
 		
+		authManager.authenticationFromSession();
+		
 		if(authManager.isLoggedIn()) {
 			try {
 				String restult = mapper.writeValueAsString(authManager.getUserDetails());

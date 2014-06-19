@@ -22,12 +22,16 @@
 			
 			<div>
 				<div class="col-1">
+				
 					<div class="error-dialog" ng-if="hasError">
 						<label class="header2">{{errorMsg}}</label>
 						<label name="status">{{errorStatus}}</label>
 					</div>
 						
-										
+					<div ng-if="adminToolsEnabled && !hasError">
+						<input type="button" value="New Message" ng-click="add()"/>
+					</div>
+									
 					<div class="div-message" ng-repeat="mess in messages | filter:query">
 						<div ng-if="adminToolsEnabled && !mess.isEditMode">
 							<input type="button" value="Edit" ng-click="edit(mess)"/>

@@ -10,6 +10,14 @@
 	<bean id="securityExpressionHandler"
     	class="org.springframework.security.access.expression.method.DefaultMethodSecurityExpressionHandler" /> 
 
+	<bean
+		class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+		<property name="targetClass"
+			value="org.springframework.security.core.context.SecurityContextHolder" />
+		<property name="targetMethod" value="setStrategyName" />
+		<property name="arguments" value="MODE_THREADLOCAL" />
+	</bean>
+
 	<security:global-method-security
 	    authentication-manager-ref="authenticationManager"
 	    jsr250-annotations="enabled"
@@ -17,7 +25,7 @@
 	    secured-annotations="enabled">
 	    
 	    <security:expression-handler ref="securityExpressionHandler" />
+	    
 	</security:global-method-security>
-	
 	
 </beans>

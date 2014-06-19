@@ -7,7 +7,7 @@ MessageApp.controller('MessageCtrl',
 	function ($scope, $http) {
 		
 		$scope.isLoggedIn = UserUtil.isUserLoggedIn();
-		$scope.adminToolsEnabled = UserUtil.hasUserRole(UserRole.ADMIN)
+		$scope.adminToolsEnabled = UserUtil.hasUserRole(UserRole.ADMIN);
 	
 	    $http.get(httpGetAllMessages).
 	    
@@ -21,6 +21,7 @@ MessageApp.controller('MessageCtrl',
 	    	$scope.hasError = true;
 	    	
 	    	// DEBUG
+	    	//$scope.hasError = false;
 	    	//$scope.adminToolsEnabled = true;
 	    	//$scope.messages = [{"id":1,"caption":"Caption 1","text":"Message 1"},{"id":2,"caption":"Caption 2","text":"Message 2"}];
 	    });
@@ -47,12 +48,12 @@ MessageApp.controller('MessageCtrl',
 			$http.post(httpSaveMessages, message).
 			
 	        success(function(data, status, headers, config) {
-	        	message = data;
+	        	message.id = data.id;
 	        });
 		};
 		
 		$scope.cancel = function(message)  {
-			if(message.id = null) {
+			if(null == message.id) {
 				$scope.remove(message);
 			} else {
 				angular.copy(message.old, message);

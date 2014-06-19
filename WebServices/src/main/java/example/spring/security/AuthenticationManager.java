@@ -53,6 +53,15 @@ public class AuthenticationManager {
 	    session().setAttribute(SECURITY_ATTRIBUTE, securityContext);
     }
 	
+	public void authenticationFromSession() {
+		SecurityContext context = (SecurityContext)
+				session().getAttribute(SECURITY_ATTRIBUTE);
+		
+		if(null != context) {
+			SecurityContextHolder.setContext(context);
+		}
+	}
+	
 	public void removeAuthentification() {
 		
 		SecurityContext securityContext = SecurityContextHolder.getContext();
