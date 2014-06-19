@@ -26,13 +26,13 @@ public class LoginServiceController {
 
 	private ObjectMapper mapper = new ObjectMapper();
 	private AuthenticationManager authManager = new AuthenticationManager();
-	 
+	
 	@Autowired
 	private GuestService guestService;
 
 	
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<HttpStatus> login(@RequestBody String userString, UriComponentsBuilder builder) {
+    public ResponseEntity<String> login(@RequestBody String userString, UriComponentsBuilder builder) {
 
 		try {
 			JsonNode rootNode = mapper.readTree(userString);
@@ -42,26 +42,40 @@ public class LoginServiceController {
 			User user = guestService.getUser(name, password);
 			
 			if(null == user) {
-				return new ResponseEntity<HttpStatus>(HttpStatus.NOT_FOUND);
+				return new ResponseEntity<String>("User not found", HttpStatus.NOT_FOUND);
 			} else {
 				authManager.authenticate(user);
-				return new ResponseEntity<HttpStatus>(HttpStatus.OK);
+				String restult = mapper.writeValueAsString(authManager.getUserDetails());
+				
+				return new ResponseEntity<String>(restult, HttpStatus.OK);
 			}
 			
 		} catch (Exception e) {
 			LOG.error("Error login user", e);
 		}
     	
-        return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<String>("Error while login", HttpStatus.BAD_REQUEST);
     }
+    
     
     @RequestMapping(value = "/logout", method = RequestMethod.POST)
     public void logout(@RequestBody String userString, UriComponentsBuilder builder) {
     	authManager.removeAuthentification(); 	
-    }    
+    }  
+    
     
 	@RequestMapping(value = "/isLoggedIn", method = RequestMethod.GET)
-	public String isUserLoggedIn() {
-		return authManager.isLoggedIn().toString();
+	public ResponseEntity<String> isUserLoggedIn() {
+		
+		if(authManager.isLoggedIn()) {
+			try {
+				String restult = mapper.writeValueAsString(authManager.getUserDetails());
+				return new ResponseEntity<String>(restult, HttpStatus.OK);
+			} catch (Exception e) {
+				LOG.error("Error is user logged in", e);
+			}
+		}
+		
+		return new ResponseEntity<String>("User not logged in", HttpStatus.EXPECTATION_FAILED);
 	}
 }

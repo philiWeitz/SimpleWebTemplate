@@ -1,13 +1,4 @@
 
-//Services
-var httpLogin = '/SimpleWebTemplateWebServices/service/login/';
-var httpLogout = '/SimpleWebTemplateWebServices/service/login/logout';
-var httpIsLoggedIn = '/SimpleWebTemplateWebServices/service/login/isLoggedIn';
-
-//Pages
-var urlMessagePage = '/SimpleWebTemplateAngularJS/app/views/messageView.html'
-
-
 
 var MessageApp = angular.module('MessageApp', []);
 
@@ -15,41 +6,30 @@ MessageApp.controller('LoginCtrl',
 		
 	function ($scope, $http)
 	{
-		$scope.errorDialogVisible = "none";
+		$scope.isLoggedIn = UserUtil.isUserLoggedIn();
 		
-		// ------ is user logged in
-	    $http.get(httpIsLoggedIn)
-	    .success(function(data) {
-	    	if(data == "true") {
-	        	var elem = document.getElementById('#loginForm');
-	        	elem.parentNode.removeChild(elem);
-	    	} else {
-	        	var elem = document.getElementById('#logoutForm');
-	        	elem.parentNode.removeChild(elem);
-	    	}
-	    }) 
-	    .error(function(data, status, headers, config) {
-	    	var elem = document.getElementById('#logoutForm');
-	    	elem.parentNode.removeChild(elem);
-	    });
+		if($scope.isLoggedIn) {
+			$scope.name = UserUtil.getUserName();
+		}
 		
-	    
 		// ------ login form 
 	    $scope.login = function() {
 	        $http.post(httpLogin, {'name': $scope.name, 'password': $scope.password}).
 	               
 	        success(function(data, status, headers, config) {
+	        	UserUtil.storeUserDetails(data);
 	        	window.location.href = urlMessagePage;
 	        }).
 	        
 	        error(function(data, status) {
-	        	$scope.errorDialogVisible = "visible";    
+	        	$scope.hasError = true;    
 	        });
-	    };
+	    }
 	    
 		// ------ logout form 
 	    $scope.logout = function() {
 	        $http.post(httpLogout, {});
+	        UserUtil.removeUserDetails();
 	        document.location.reload(true);      
 	    };
 	}

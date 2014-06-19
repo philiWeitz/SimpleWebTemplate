@@ -2,6 +2,7 @@
 	<head>
 		<script src="../js/bower_components/angular/angular.js"></script>
 	  	<script src="../js/controller/loginCtrl.js"></script>
+	  	<script src="../js/controller/utilCtrl.js"></script>
 	  	
 		<link rel="stylesheet" type="text/css" href="../css/main.css">
 	</head>
@@ -12,13 +13,14 @@
 				<label class="header1">Sign in to Simple Web Template</label> <br/>
 				<div class="horizontal-line"></div>
 
-				<form id="#loginForm" ng-submit="login()">
-					<div class="error-dialog" style="display: {{errorDialogVisible}};">
+				<form ng-submit="login()" ng-if="!isLoggedIn">
+				
+					<div class="error-dialog" ng-if="hasError">
 						<label>User name or password is incorrect.</label>
 					</div>
 							
-					<input type="text" name="name" placeholder="Name" ng-model="name" required/> <br/>
-					<input type="password" name="password" placeholder="Password" ng-model="password" required/> <br/>
+					<input type="text" name="name" placeholder="Name" ng-model="$parent.name" required/> <br/>
+					<input type="password" name="password" placeholder="Password" ng-model="$parent.password" required/> <br/>
 					
 					<input type="checkbox" value="remember">
 					<label>Remember me</label> <br/>
@@ -26,9 +28,8 @@
 					<input type="submit" value="Sign in"/>
 				</form>
 				
-				<form id="#logoutForm" ng-submit="logout()">
-					<label>You are already logged in.</label> <br/>
-					
+				<form ng-submit="logout()" ng-if="isLoggedIn">
+					<label>You are already logged in as {{name}}.</label> <br/>					
 					<input type="submit" value="Sign out"/>
 				</form>
 			</div>

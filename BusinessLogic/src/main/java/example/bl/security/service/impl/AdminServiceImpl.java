@@ -22,8 +22,8 @@ public class AdminServiceImpl implements AdminService {
 	UserDAOService userService;
 	
 		
-	public void addMessage(Message msg) {		
-		messageService.saveOrUpdate(msg);
+	public Message addOrUpdateMessage(Message msg) {		
+		return messageService.saveOrUpdate(msg);
 	}
 	
 	public void deleteMessage(Message msg) {

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
+import example.common.UserDetails;
 import example.jpa.model.User;
 import example.jpa.model.UserRole;
 
@@ -32,11 +33,19 @@ public class AuthenticationManager {
 		for(UserRole role : user.getRoles()) {
 			grantedAuths.add(new SimpleGrantedAuthority(role.toString()));
 		}
-
+		
+		// create authentication token
         UsernamePasswordAuthenticationToken token = 
         		new UsernamePasswordAuthenticationToken(
         				user.getName(), user.getPassword(), grantedAuths);
-		
+        
+        // set user details
+		UserDetails details = new UserDetails();
+		details.setName(user.getName());
+		details.setRoles(user.getRoles());
+		token.setDetails(details);
+        
+		// add security token to session
 	    SecurityContext securityContext = SecurityContextHolder.getContext();
 	    securityContext.setAuthentication(token);
 
@@ -45,11 +54,26 @@ public class AuthenticationManager {
     }
 	
 	public void removeAuthentification() {
-		session().setAttribute(SECURITY_ATTRIBUTE, null);
+		
+		SecurityContext securityContext = SecurityContextHolder.getContext();
+	    securityContext.setAuthentication(null);
+	    
+		session().removeAttribute(SECURITY_ATTRIBUTE);
+		session().invalidate();
 	}
 	
 	public Boolean isLoggedIn() {
 		return (null != session().getAttribute(SECURITY_ATTRIBUTE));
+	}
+	
+	public UserDetails getUserDetails() {
+		if(isLoggedIn()) {
+			SecurityContext context = (SecurityContext)
+					session().getAttribute(SECURITY_ATTRIBUTE);
+			
+			return (UserDetails) context.getAuthentication().getDetails();
+		}
+		return null;
 	}
 	
 	private static HttpSession session() {

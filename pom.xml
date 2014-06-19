@@ -15,6 +15,7 @@
 		<spring.version>4.0.5.RELEASE</spring.version>
 		<spring.security.version>3.2.4.RELEASE</spring.security.version>
 		<servlet.api.version>2.5</servlet.api.version>
+		<javax.servlet.api.version>3.1.0</javax.servlet.api.version>
 		<javax.annotation.version>1.2</javax.annotation.version>
 
 		<jpa.api.version>1.0.0.Final</jpa.api.version>
@@ -140,6 +141,12 @@
 				<version>${servlet.api.version}</version>
 				<scope>provided</scope>
 		  	</dependency>
+		  	
+		  	<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${javax.servlet.api.version}</version>
+			</dependency>
 			
 			<!-- Hibernate dependencies -->
 			<dependency>
