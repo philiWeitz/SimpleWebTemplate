@@ -58,16 +58,15 @@ public class LoginServiceController {
     }
     
     
-    @RequestMapping(value = "/logout", method = RequestMethod.POST)
-    public void logout(@RequestBody String userString, UriComponentsBuilder builder) {
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public ResponseEntity<HttpStatus> logout() {    	
     	authManager.removeAuthentification(); 	
+    	return new ResponseEntity<HttpStatus>(HttpStatus.OK);
     }  
     
     
 	@RequestMapping(value = "/isLoggedIn", method = RequestMethod.GET)
 	public ResponseEntity<String> isUserLoggedIn() {
-		
-		authManager.authenticationFromSession();
 		
 		if(authManager.isLoggedIn()) {
 			try {

@@ -27,9 +27,12 @@ MessageApp.controller('MessageCtrl',
 	    });
 		
 	    $scope.logout = function() {
-	        $http.post(httpLogout, {});
-	        UserUtil.removeUserDetails();
-	        document.location.reload(true);      
+	        $http.get(httpLogout).
+	        
+	        success(function(data, status, headers, config) {
+		        document.location.reload(true);
+		        UserUtil.removeUserDetails();
+	        });
 	    };
 		
 		$scope.edit = function(message)  {
@@ -37,10 +40,13 @@ MessageApp.controller('MessageCtrl',
 			message.old = angular.copy(message);
 		};
 		
-		$scope.remove = function(message) {
+		$scope.remove = function(message) {	
 			var index = $scope.messages.indexOf(message);
 			$scope.messages.splice(index,1);
-			$http.post(httpDeleteMessages, message);
+			
+			if(null != message) {
+				$http.post(httpDeleteMessages, message);
+			}
 		};
 		
 		$scope.save = function(message)  {

@@ -28,9 +28,12 @@ MessageApp.controller('LoginCtrl',
 	    
 		// ------ logout form 
 	    $scope.logout = function() {
-	        $http.post(httpLogout, {});
-	        UserUtil.removeUserDetails();
-	        document.location.reload(true);      
+	        $http.get(httpLogout).
+	        
+	        success(function(data, status, headers, config) {
+		        document.location.reload(true);
+		        UserUtil.removeUserDetails();
+	        });
 	    };
 	}
 );

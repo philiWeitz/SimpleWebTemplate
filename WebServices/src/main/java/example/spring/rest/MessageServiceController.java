@@ -19,7 +19,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import example.bl.security.service.AdminService;
 import example.bl.security.service.GuestService;
 import example.jpa.model.Message;
-import example.spring.security.AuthenticationManager;
 
 @RestController
 @RequestMapping("/service/message")
@@ -40,23 +39,19 @@ public class MessageServiceController {
 	private AdminService adminService;
 
 	private ObjectMapper mapper = new ObjectMapper();
-	private AuthenticationManager authManager = new AuthenticationManager();
-
+	
 
 	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
 	public String getAllMessages() throws JsonGenerationException,
 			JsonMappingException, IOException {
 
-		authManager.authenticationFromSession();
-		
 		return mapper.writeValueAsString(guestService.getAllMessages());
 	}
 	
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ResponseEntity<String> createMessage() {
 		try {
-			authManager.authenticationFromSession();
-			
+
 			String result = mapper.writeValueAsString(new Message());
 			return new ResponseEntity<String>(result, HttpStatus.OK); 
 			
@@ -71,7 +66,6 @@ public class MessageServiceController {
     public ResponseEntity<String> saveMessage(@RequestBody String messString, UriComponentsBuilder builder) {
 
 		try {
-			authManager.authenticationFromSession();
 			
 			Message message = mapper.readValue(messString, Message.class);
 			message = adminService.addOrUpdateMessage(message);
@@ -89,7 +83,6 @@ public class MessageServiceController {
     public ResponseEntity<HttpStatus> deleteMessage(@RequestBody String messString, UriComponentsBuilder builder) {
 
 		try {
-			authManager.authenticationFromSession();
 			
 			Message message = mapper.readValue(messString, Message.class);
 			adminService.deleteMessage(message);
