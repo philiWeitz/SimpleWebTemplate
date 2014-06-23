@@ -7,7 +7,7 @@ var localizedContent = {
 		'placeholder.pwd': 'Password',
 		'checkbox.remember.me': 'Remember me',	
 		'button.login': 'Sign in',
-		'button.logou': 'Sign out',
+		'button.logout': 'Sign out',
 		'message.logged.in': 'You are already logged in as',
 		'error.login': 'User name or password is incorrect'	
 	},
@@ -18,7 +18,7 @@ var localizedContent = {
 		'placeholder.pwd': 'Passwort',
 		'checkbox.remember.me': 'Merken',	
 		'button.login': 'Login',
-		'button.logou': 'Logout',
+		'button.logout': 'Logout',
 		'message.logged.in': 'Sie sind bereits eingelogged als',
 		'error.login': 'Benutzername oder passwort is falsch'		
 	}

@@ -1,8 +1,8 @@
 
 
-var MessageApp = angular.module('MessageApp', []);
+var app = angular.module('app', []);
 
-MessageApp.controller('LoginCtrl', 
+app.controller('LoginCtrl', 
 		
 	function ($scope, $http)
 	{

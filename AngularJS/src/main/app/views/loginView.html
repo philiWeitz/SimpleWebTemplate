@@ -1,12 +1,12 @@
-<html ng-app="MessageApp">
+<html ng-app="app">
 
 	<head>
 		<script src="../js/bower_components/angular/angular.js"></script>
 	  	<script src="../js/controller/loginCtrl.js"></script>
 	  	<script src="../js/controller/utilCtrl.js"></script>
 	  	
-		<!-- localization JSON object -->
 	  	<script src="content/loginViewContent.js"></script>
+	  	<script src="../js/snippets/languageBarSnippet.js"></script>
 
 		<link rel="stylesheet" type="text/css" href="../css/main.css">
 	</head>
@@ -15,15 +15,7 @@
 	<body ng-controller="LoginCtrl">
 		<div class="login-dialog">
 			
-			<div class="language.header">
-				<div ng-if="LangCurr() != 'en'">
-					<a href="" ng-click="LangSet('en')">English</a>
-				</div>
-						
-				<div ng-if="LangCurr() != 'de'">
-					<a href="" ng-click="LangSet('de')">Deutsch</a>
-				</div>
-			</div>
+			<div html-snippet snippet="languageBarSnippet"></div>
 
 			<label class="header1">{{LangGet('header')}}</label> <br/>
 			<div class="horizontal-line"></div>

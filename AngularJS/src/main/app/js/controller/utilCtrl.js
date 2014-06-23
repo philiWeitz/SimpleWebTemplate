@@ -15,7 +15,7 @@ var urlMessagePage = '/SimpleWebTemplateAngularJS/app/views/messageView.html'
 
 	
 // update user login status
-MessageApp.run(function ($rootScope, $http) {
+app.run(function ($rootScope, $http) {
 	
 	// update if user is logged in or not
 	UserUtil.updateUserDetails($http);
@@ -43,7 +43,7 @@ var UserUtil = {
 	
 	storeUserDetails : function (userDetails) {
 		userDetails.timestamp = new Date().getTime();
-		localStorage.setItem(this.storageKey, angular.toJson(userDetails,true));
+		localStorage.setItem(UserUtil.storageKey, angular.toJson(userDetails,true));
 	},
 
 	getUserName : function () {
@@ -61,7 +61,7 @@ var UserUtil = {
 	
 	getUserData : function () {
 		var timeNow = new Date().getTime();
-		var userDetails = localStorage.getItem(this.storageKey);
+		var userDetails = localStorage.getItem(UserUtil.storageKey);
 		
 		if(null != userDetails) {
 			
@@ -78,11 +78,11 @@ var UserUtil = {
 	},
 
 	removeUserDetails : function () {
-		localStorage.removeItem(this.storageKey);
+		localStorage.removeItem(UserUtil.storageKey);
 	},
 
 	isUserLoggedIn : function () {
-		var userDetails = localStorage.getItem(this.storageKey);
+		var userDetails = localStorage.getItem(UserUtil.storageKey);
 		return (null != userDetails);
 	},
 	
@@ -104,19 +104,52 @@ var UserUtil = {
 // reads a localization key - value pair from "localizedContent"
 var Lang = {
 	
-	language : 'en',
-	
+	defaultLanguage : 'en',
+		
+	storageKey : 'userLanguage',
+
 	getLanguage : function() {
-		return Lang.language;
+		var language = localStorage.getItem(Lang.storageKey);
+		
+		if(null == language) {
+			localStorage.setItem(Lang.storageKey, Lang.defaultLanguage);
+			language = localStorage.getItem(Lang.storageKey);
+		}
+
+		return language;
 	},
 	
-	get : function(key) {		
-		return localizedContent[Lang.language][key];
+	get : function(key) {	
+		var language = Lang.getLanguage();
+		return localizedContent[language][key];
 	},
 	
 	setLanguage : function(key) {		
-		Lang.language = key;
+		localStorage.setItem(Lang.storageKey, key);
 	}
 }
 
+
+// own directive to insert html templates 
+// e.g. <div html-snippet snippet="languageBarSnippet"></div>
+app.directive('htmlSnippet', ['$compile', function($compile) {
+    return function(scope, elem, attrs) {
+    	
+    	if(null != scope.snippet) {
+	    	// get snippet string
+	    	var html = scope.snippet[attrs.snippet];
+	    	
+	    	// create an agular element from string and compile
+	        var el = angular.element(html),
+	        compiled = $compile(el);
+	        
+	        // append element and view
+	        elem.append(el);
+	        compiled(scope);
+
+    	} else {
+    		throw new Error("No html snippet defined (scope.snippet == null)");
+    	}
+    };
+}]);
 

@@ -1,7 +1,7 @@
 
-describe("MessageApp", function () {
+describe("app", function () {
  
-    beforeEach(module('MessageApp'));
+    beforeEach(module('app'));
  
     describe("MessageCtrl", function () {
  
