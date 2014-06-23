@@ -7,7 +7,7 @@ MessageApp.controller('LoginCtrl',
 	function ($scope, $http)
 	{
 		$scope.isLoggedIn = UserUtil.isUserLoggedIn();
-		
+
 		if($scope.isLoggedIn) {
 			$scope.name = UserUtil.getUserName();
 		}

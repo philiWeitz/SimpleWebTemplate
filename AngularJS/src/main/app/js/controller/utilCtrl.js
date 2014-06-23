@@ -13,11 +13,17 @@ var httpGetAllMessages = '/SimpleWebTemplateWebServices/service/message/getAll';
 // Pages
 var urlMessagePage = '/SimpleWebTemplateAngularJS/app/views/messageView.html'
 
-
 	
 // update user login status
 MessageApp.run(function ($rootScope, $http) {
+	
+	// update if user is logged in or not
 	UserUtil.updateUserDetails($http);
+	
+	// add localization function to scope
+	$rootScope.LangGet = Lang.get;
+	$rootScope.LangCurr = Lang.getLanguage;
+	$rootScope.LangSet = Lang.setLanguage;
 });	
 
 
@@ -28,11 +34,15 @@ var UserRole = {
 };
 
 
+// handles user roles and user is logged in 
 var UserUtil = {
-		
+	
+	timeOutInMin : 10 * 100000, 
+	
 	storageKey : "userDetails",
 	
 	storeUserDetails : function (userDetails) {
+		userDetails.timestamp = new Date().getTime();
 		localStorage.setItem(this.storageKey, angular.toJson(userDetails,true));
 	},
 
@@ -50,10 +60,19 @@ var UserUtil = {
 	},
 	
 	getUserData : function () {
+		var timeNow = new Date().getTime();
 		var userDetails = localStorage.getItem(this.storageKey);
 		
 		if(null != userDetails) {
-			return angular.fromJson(userDetails);
+			
+			var user = angular.fromJson(userDetails);
+			
+			if((user.timestamp + UserUtil.timeOutInMin) < timeNow) {
+				UserUtil.removeUserDetails();
+				return null;
+			} else {
+				return user;
+			}
 		}
 		return null;
 	},
@@ -80,3 +99,24 @@ var UserUtil = {
 	    });
 	}
 };
+
+
+// reads a localization key - value pair from "localizedContent"
+var Lang = {
+	
+	language : 'en',
+	
+	getLanguage : function() {
+		return Lang.language;
+	},
+	
+	get : function(key) {		
+		return localizedContent[Lang.language][key];
+	},
+	
+	setLanguage : function(key) {		
+		Lang.language = key;
+	}
+}
+
+
