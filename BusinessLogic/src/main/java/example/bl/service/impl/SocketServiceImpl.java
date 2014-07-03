@@ -20,6 +20,7 @@ class SocketServiceImpl implements SocketService {
 	public void sendMessage(String message) throws UnknownHostException, IOException {
 		PrintWriter out = new PrintWriter(getServer().getOutputStream(), true);		
 		out.write(message);
+		out.close();
 	}
 	
 	

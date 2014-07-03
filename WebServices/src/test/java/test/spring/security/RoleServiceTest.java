@@ -4,17 +4,13 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.web.context.request.RequestAttributes;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
+import test.common.AbstractTest;
 import example.bl.security.service.AdminService;
 import example.bl.security.service.GuestService;
 import example.jpa.model.Message;
@@ -26,7 +22,7 @@ import example.spring.security.AuthenticationManager;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"/spring*.xml"})
-public class RoleServiceTest {
+public class RoleServiceTest extends AbstractTest {
 
 	@Autowired
 	private GuestService guestService;
@@ -41,14 +37,7 @@ public class RoleServiceTest {
 	private User admin;
 	private User user;
 	
-	
-	@BeforeClass 
-	public static void beforeTests() {
-		MockHttpServletRequest request = new MockHttpServletRequest();
-		RequestAttributes attr = new ServletRequestAttributes(request);
-		RequestContextHolder.setRequestAttributes(attr);
-	}
-	
+
 	@Before
 	public void beforeTest() {
 		
