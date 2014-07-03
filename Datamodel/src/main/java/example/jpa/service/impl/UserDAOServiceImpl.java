@@ -12,7 +12,7 @@ import example.jpa.service.UserDAOService;
 
 
 @Resource
-public class UserDAOServiceImpl 
+class UserDAOServiceImpl 
 	extends AbstractDAOServiceImpl<User> 
 	implements UserDAOService {
 	

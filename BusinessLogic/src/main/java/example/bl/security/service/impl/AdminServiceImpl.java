@@ -13,7 +13,7 @@ import example.jpa.service.UserDAOService;
 
 @Resource
 @Secured ({"ROLE_ADMIN"})
-public class AdminServiceImpl implements AdminService {
+class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	MessageDAOService messageService;

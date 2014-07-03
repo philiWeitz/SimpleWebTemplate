@@ -7,7 +7,7 @@ import example.jpa.service.MessageDAOService;
 
 
 @Resource
-public class MessageDAOServiceImpl 
+class MessageDAOServiceImpl 
 	extends AbstractDAOServiceImpl<Message> 
 	implements MessageDAOService {
 

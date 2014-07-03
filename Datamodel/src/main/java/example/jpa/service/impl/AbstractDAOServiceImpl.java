@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import example.jpa.model.AbstractEntity;
 
-public abstract class AbstractDAOServiceImpl<T extends AbstractEntity> {
+abstract class AbstractDAOServiceImpl<T extends AbstractEntity> {
 	private static Logger LOG = LogManager
 			.getLogger(AbstractDAOServiceImpl.class);
 	
